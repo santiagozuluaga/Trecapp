@@ -47,13 +47,13 @@
                 </b-row>
                 <b-row class="justify-content-center">
                     <b-col v-if="estado === false" lg="2">
-                        <b-button v-on:click="playTimer()" block variant="primary">Empezar</b-button>
+                        <b-button class="buttons-clock" v-on:click="playTimer()" block variant="primary">Empezar</b-button>
                     </b-col>
                     <b-col v-if="estado === true" lg="2">
-                        <b-button v-on:click="stopTimer()" block variant="primary">Detener</b-button>
+                        <b-button class="buttons-clock" v-on:click="stopTimer()" block variant="primary">Detener</b-button>
                     </b-col>
                     <b-col lg="2">
-                        <b-button v-on:click="resetTimer()" block variant="danger">Reiniciar</b-button>
+                        <b-button class="buttons-clock" v-on:click="resetTimer()" block variant="danger">Reiniciar</b-button>
                     </b-col>
                 </b-row>
             </div>
@@ -223,7 +223,7 @@ export default {
 .button-timer{
     font-size: 20px;
     color: white;
-    margin: 0px 5px 15px 5px;
+    margin: 0px 5px 5px 5px;
     padding: 5px 30px 5px 30px;
 }
 
@@ -264,4 +264,7 @@ export default {
     margin-bottom: 0px;
 }
 
+.buttons-clock{
+    margin-top: 10px;
+}
 </style>

@@ -149,35 +149,41 @@
         </b-container>
         
         <b-container v-if="level[3] === 1 " class="text-center">
+            <h3 class="title-emotions">Preguntas disputa</h3>
+            <h4>Tomese el tiempo para responder cada pregunta antes de seguir y en caso de no poder, haga el ejercicio de respiracion e intente de nuevo.</h4>
+            <hr />
             <b-row class="justify-content-center">
-                <h3 class="title-emotions">Preguntas disputa</h3>
-                <h4>Tomese el tiempo para responder cada pregunta antes de seguir y en caso de no poder, haga el ejercicio de respiracion e intente de nuevo.</h4>
-                <hr />
-                <b-col v-if="irrational[0] === 1">
+                <b-col v-if="irrational[0] === 1" cols="12">
+                    <!-- Debate logico -->
                     <p>¿Qué tan lógico es pensar que algo fuera de mi poder debería ser como yo quiera?</p>
                     <p>Pensar en que desearía que aquello fuera posible pero en caso de no serlo, entendería que está bien <br /> ¿me ayuda a calmar mi emocion?</p>
                     <hr/>
                 </b-col>
-                <b-col v-if="irrational[1] === 1">
+                <b-col v-if="irrational[1] === 1" cols="12">
+                    <!-- Debate logico -->
                     <p>¿De verdad este problema es 100% terrible y no hay nada peor?</p>
                     <p>Pensar que puede haber cosas peores en el mundo y que posiblemente esté exagerando<br /> ¿me ayuda a calmar mi emocion?</p>
                     <hr/>
                 </b-col>
-                <b-col v-if="irrational[2] === 1"> 
+                <b-col v-if="irrational[2] === 1" cols="12">
+                    <!-- Debate logico -->
                     <p>¿Despues de este suceso no podre sobrevivir y por esto no puedo soportarlo?</p>
                     <p>Recordar que he pasado por momentos iguales o por lo que paso tiene solucion, <br /> ¿me ayuda a calmar mi emocion?</p>
                     <hr/>
                 </b-col>
-                <b-col v-if="irrational[3] === 1">
+                <b-col v-if="irrational[3] === 1" cols="12">
+                    <!-- Debate logico -->
                     <p>¿Dónde está la prueba de que esa persona es de lo peor y no tiene ningun otra cualidad buena?</p>
-                    <p></p>                        
+                    <p>Recordar que todas las personas nos equivocamos y que eso está bien, <br /> ¿me ayuda a calmar mi emocion?</p>                        
                 </b-col>
             </b-row>
         </b-container>
 
         <b-container v-if="level[4] === 1 " class="text-center">
+            <h3 class="title-emotions">Siempre recuerda!</h3>
+            <hr />
             <b-row class="justify-content-center">
-                <h3>Siempre recuerda!</h3>
+                <!--
                 <b-col v-if="irrational[0] === 1">
                     
                 </b-col>
@@ -190,30 +196,22 @@
                 <b-col v-if="irrational[3] === 1">
                     
                 </b-col>
-                <p>Futura imagen we</p>
+                -->
             </b-row>
         </b-container>
 
         <b-container v-if="level[5] === 1 " class="text-center">
+            <h3 class="title-emotions">Sigue ingresando para tener tu registro semanal de emociones!</h3>
+            <hr />
             <b-row>
                 <b-col>
-
-                </b-col>
-            </b-row>
-        </b-container>
-
-        <b-container v-if="level[6] === 1 " class="text-center">
-            <b-row>
-                <b-col>
-                    <h3>Sigue ingresando para tener tu registro semanal de emociones!</h3>
-                    <p>Aqui ira una imagen a futuro</p>
+                    <img src="@/assets/rising.svg" width="40%">
                 </b-col>
             </b-row>
         </b-container>
 
         <!--BOTONES-->
         <b-container class="buttons-debate">
-            <hr />
             <b-button v-on:click="levelDown()" variant="primary" class="button-left">Atrás</b-button>
             <b-button v-on:click="levelUp()" variant="primary" class="button-right">Siguiente</b-button>
         </b-container>
@@ -228,7 +226,7 @@ export default {
         return{
             
             emotions: "Ninguno",
-            level: [1,0,0,0,0,0,0],
+            level: [1,0,0,0,0,0],
             irrational: [0,0,0,0,0],
             event: ""
         }
@@ -257,10 +255,10 @@ export default {
                 else {
 
                     if(this.emotions === "Happy" || this.emotions === "Bored"){
-                        this.level = [0,0,0,0,0,0,1];
+                        this.level = [0,0,0,0,0,1];
                     }
                     else {
-                        this.level = [0,1,0,0,0,0,0];
+                        this.level = [0,1,0,0,0,0];
                     }
                 }
                 
@@ -271,7 +269,7 @@ export default {
                     this.showModal('alert-emotions');
                 }
                 else {
-                    this.level = [0,0,1,0,0,0,0];
+                    this.level = [0,0,1,0,0,0];
                 }
             }
             else if(this.level[2] === 1){
@@ -287,20 +285,17 @@ export default {
                 }
 
                 if(temp === true){
-                    this.level = [0,0,0,1,0,0,0];
+                    this.level = [0,0,0,1,0,0];
                 }
                 else{
                     this.showModal('alert-emotions');
                 }
             }
             else if(this.level[3] === 1){
-                 this.level = [0,0,0,0,1,0,0];
+                 this.level = [0,0,0,0,0,1];
             }
             else if(this.level[4] === 1){
-                this.level = [0,0,0,0,0,1,0];
-            }
-            else if(this.level[5] === 1){
-                this.level = [0,0,0,0,0,0,1];
+                this.level = [0,0,0,0,0,1];
             }
             else{
                 this.$router.push('/dashboard');
@@ -309,26 +304,23 @@ export default {
         levelDown() {
             
             if(this.level[1] === 1){
-                this.level = [1,0,0,0,0,0,0];
+                this.level = [1,0,0,0,0,0];
             }
             else if(this.level[2] === 1){
-                this.level = [0,1,0,0,0,0,0];
+                this.level = [0,1,0,0,0,0];
             }
             else if(this.level[3] === 1){
-                this.level = [0,0,1,0,0,0,0];
+                this.level = [0,0,1,0,0,0];
             }
             else if(this.level[4] === 1){
-                this.level = [0,0,0,1,0,0,0];
+                this.level = [0,0,0,1,0,0];
             }
             else if(this.level[5] === 1){
-                this.level = [0,0,0,0,1,0,0];
-            }
-            else if(this.level[6] === 1){
                 if(this.emotions === "Happy" || this.emotions === "Bored"){
-                    this.level = [1,0,0,0,0,0,0];
+                    this.level = [1,0,0,0,0,0];
                 }
                 else {
-                    this.level = [0,0,0,0,0,1,0];
+                    this.level = [0,0,0,1,0,0];
                 }
                 
             }
