@@ -9,7 +9,7 @@
         <b-navbar-nav class="ml-auto">
           <router-link v-if="!auth" class="text-nav" to="/signup">Comienza</router-link>
           <router-link v-if="!auth" class="text-nav" to="/signin">Acceder</router-link>
-          <b-navbar-item v-on:click="logout()" v-if="auth" class="text-nav">Salir</b-navbar-item>
+          <b-nav-item v-on:click="logout()" v-if="auth" class="text-nav">Salir</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </div>

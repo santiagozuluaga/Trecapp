@@ -83,7 +83,8 @@ export default {
                         confirmpassword: this.confirmpassword
                     })
                 })
-                .then(res => this.checkAuth(res.json()))
+                .then(res => res.json())
+                .then(res => this.checkAuth(res))
                 .catch(err => console.log(err))
             }
 

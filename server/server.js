@@ -5,7 +5,7 @@ const app = express();
 const path = require("path");
 const mongoose = require('mongoose');
 const user = require('./models/Users');
-
+const bcrypt = require('bcrypt-nodejs');
 //Middlewares
 app.set('port', process.env.PORT || 3000);
 app.use(morgan('dev'));
@@ -20,44 +20,74 @@ mongoose.connect("mongodb+srv://NeuroApp:neurofilos@cluster0-9sz2p.mongodb.net/t
 .then(db => console.log('db conectada'))
 .catch(err => console.error(err));
 
-//Routes
-app.get('/*/', (req, res, error) => {
 
+//Routes
+app.get('/*/', (req, res) => {
     res.sendFile(path.join(__dirname,'../dist/index.html'));
 })
 
 //Signup    
 app.post('/signup/user', async(req,res)=>{
 
-    const {name, email, password, confirmpassword} = req.body;
-    const userFind = await user.find( {email: email} );
+    var {name, email, password, confirmpassword} = req.body;
+    var userFind = await user.find( {email: email} );
     
-    if(userFind[0]){
+    if(name === " " || email === " " || password === " "){
+        res.json({
+            message: 'Debes llenar todos los campos'
+        });
+        
+    }
+    
+    else if(password !== confirmpassword){
+        res.json({
+            message: 'Las contraseñas deben coincidir '
+        });
+    }
+
+    else if(userFind[0]){
         res.json({
             message: 'Usuario ya registrado'
         });
     }
     else {
-        const newUser = new user({name,email,password});
+        
+        
+        password = bcrypt.hashSync(password);
+        var newUser = new user({name, email, password});
         await newUser.save();
         res.json({
             message: 'Registro de sesión correcto'
         });
+        
     }    
 });
+
+
 
 //Signin
 app.post('/signin/user', async(req,res)=>{
 
-    const {email, password} = req.body;
-    const userFind = await user.find( {email: email, password: password} );
+    var {email, password} = req.body;
+    var userFind = await user.find( {email: email} );
 
     if(userFind[0]){
-        res.json({
-            message: 'Inicio de sesión correcto'
-        });
+
+        if(bcrypt.compareSync(password, userFind[0].password)){
+
+            res.json({
+                message: 'Inicio de sesión correcto'
+            });
+        }
+        else{
+
+            res.json({
+                message: 'Contraseña incorrecta'
+            })
+        }
     }
     else {
+
         res.json({
             message: 'Usuario no encontrado'
         });

@@ -41,7 +41,9 @@ export default {
     },
     methods: {
         checkAuth(res) {
+            console.log("verificando");
             var message = res.message;
+            console.log(message);
             if(message === "Usuario no encontrado"){
                 this.alertData = true;
             }
@@ -69,7 +71,8 @@ export default {
                         password: this.password
                     })
                 })
-                .then(res => this.checkAuth(res.json()))
+                .then(res => res.json())
+                .then(res => this.checkAuth(res))
                 .catch(err => console.log(err))
             }
         }
