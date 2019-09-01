@@ -133,7 +133,9 @@ export default {
 
             if(this.estado === false && this.sec > 0 || this.estado === false && this.min > 0){
                 this.estado = true; 
+
                 timer = setInterval(()=>{
+                        
                     if(this.sec>0){
                         this.sec = this.sec - 1;
                     }

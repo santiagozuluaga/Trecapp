@@ -303,7 +303,10 @@ export default {
         },
         levelDown() {
             
-            if(this.level[1] === 1){
+            if(this.level[0] === 1){
+                this.$router.push('/dashboard');
+            }
+            else if(this.level[1] === 1){
                 this.level = [1,0,0,0,0,0];
             }
             else if(this.level[2] === 1){
