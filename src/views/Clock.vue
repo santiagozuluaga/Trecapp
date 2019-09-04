@@ -2,6 +2,12 @@
     <div>
         <Nav />
         <b-container>
+            <audio id="breathing1">
+                <source src="@/assets/audios/breathing1.mp3" type="audio/mp3">
+            </audio>
+            <audio id="breathing2">
+                <source src="@/assets/audios/breathing2.mp3" type="audio/mp3">
+            </audio>
             <!--MODALS-->
             <b-modal ref="close-component" hide-header hide-footer>
                 <div class="text-center">
@@ -72,9 +78,12 @@ export default {
             min: 0,
             sec: 0,
             estado: false,
-            sizeBall: 80,
+            sizeBall: 60,
             estadoBall: 0,
-            marginBall: 200
+            marginBall: 210,
+            estadoaudio: false,
+            upsize: false,
+            downsize: false
         }
     },
     components: {
@@ -84,9 +93,9 @@ export default {
         this.min = 0;
         this.sec = 0;
         this.estado = false;
-        this.sizeBall = 80;
+        this.sizeBall = 60;
         this.estadoBall = 0;
-        this.marginBall = 200;
+        this.marginBall = 210;
         clearInterval(timer);
         clearInterval(timerAnimation);
     },
@@ -123,11 +132,14 @@ export default {
             this.min = 0;
             this.sec = 0;
             this.estado = false;
-            this.sizeBall = 80;
+            this.sizeBall = 60;
             this.estadoBall = 0;
-            this.marginBall = 200;
+            this.marginBall = 210;
+            this.estadoaudio = false;
+            this.upsize = false;
+            this.downsize = false;
             var circle = document.getElementById('circle');
-            circle.style = "width: 80px; height: 80px; top: 200px;"
+            circle.style = "width: 60px; height: 60px; top: 210px;";
         },
         playTimer() {
 
@@ -160,6 +172,16 @@ export default {
         stopTimer() {
             if(this.estado === true){
                 this.estado = false;
+
+                if(this.upsize){
+                    document.getElementById("breathing1").pause();
+                    this.upsize = false;
+                }
+                else{
+                    document.getElementById("breathing2").pause();
+                    this.downsize = false;
+                }
+
                 clearInterval(timer);
                 clearInterval(timerAnimation);
             }
@@ -175,8 +197,8 @@ export default {
             }
         },
         plusSize() {
-            this.sizeBall = this.sizeBall + 20/10;
-            this.marginBall = this.marginBall - 10/10;
+            this.sizeBall = this.sizeBall + 2;
+            this.marginBall = this.marginBall - 1;
 
             if(this.sizeBall === 200){
                 this.estadoBall = 1;
@@ -184,22 +206,38 @@ export default {
 
         },
         minusSize() {
-            this.sizeBall = this.sizeBall - 20/10;
-            this.marginBall = this.marginBall + 10/10;
+            this.sizeBall = this.sizeBall - 2;
+            this.marginBall = this.marginBall + 1;
 
-            if(this.sizeBall === 80){
+            if(this.sizeBall === 60){
                 this.estadoBall = 0;
             }
         },
         changeSize() {
 
             if(this.estado === true){
+
+                this.estadoaudio = true;
                 if(this.estadoBall === 0){
+
+                    if(this.estadoaudio === true && this.upsize === false){
+                        document.getElementById("breathing1").play();
+                        this.upsize = true;
+                        this.downsize = false;
+                    }
+                    
                     this.plusSize();
                     var circle = document.getElementById('circle');
                     circle.style = "width: " + this.sizeBall + "px; " + "height: " + this.sizeBall + "px;" + "top: " + this.marginBall + "px;" ;
                 }
                 else {
+
+                    if(this.estadoaudio === true && this.downsize === false){
+                        document.getElementById("breathing2").play();
+                        this.upsize = false;
+                        this.downsize = true;
+                    }
+
                     this.minusSize();
                     var circle = document.getElementById('circle');
                     circle.style = "width: " + this.sizeBall + "px; " + "height: " + this.sizeBall + "px;" + "top: " + this.marginBall + "px;" ;
@@ -241,19 +279,19 @@ export default {
 .circle{
     background: #2F89FC;
     border-radius: 100%;
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
     position: absolute;
-    top: 210px;
+    top: 215px;
 }
 
 .circle-breathing{
     background: #1a65ce;
     border-radius: 100%;
-    height: 80px;
-    width: 80px;
+    height: 60px;
+    width: 60px;
     position: absolute;
-    top: 200px;
+    top: 210px;
 }
 
 .container-buttons-timer{

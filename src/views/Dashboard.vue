@@ -27,30 +27,29 @@
                         <b-container>
                             <b-row class="text-left">
                                 <b-col cols="4" lg="3">
-                                    <img v-on:click="prueba()" src="@/assets/abc-block.svg" width="80px">
+                                    <img class="hand-link" v-on:click="showLearn('ABC')" src="@/assets/abc-block.svg" width="80px">
                                 </b-col>
                                 <b-col>
-                                    <h4>ABC</h4>
+                                    <h4 class="hand-link" v-on:click="showLearn('ABC')">ABC</h4>
                                     <p>Aprende que significa cada letra y a identificarlas en el Neuro debate</p>
                                 </b-col>
                             </b-row>
                             <b-row class="text-left">
                                 <b-col cols="4" lg="3">
-                                    <img v-on:click="prueba()" src="@/assets/breathe.svg" width="80px">
+                                    <img class="hand-link" v-on:click="showLearn('Breathing')" src="@/assets/breathe.svg" width="80px">
                                 </b-col>
                                 <b-col>
-                                    <h4>Una buena respiración</h4> 
-                                    <p>Practica tu respiración diariamente para que sea una herramienta contra todo.
-                                        Y mira ejemplos de como hacer un entrenamiento de respiración.
+                                    <h4 class="hand-link" v-on:click="showLearn('Breathing')">Una buena respiración</h4> 
+                                    <p>Mira como llevar a cabo los ejercicios de respiración, aprende la velocidad en que se deben hacer y mucho más.
                                     </p>
                                 </b-col>
                             </b-row>
                             <b-row class="text-left">
                                 <b-col cols="4" lg="3">
-                                    <img v-on:click="prueba()" src="@/assets/prenatal.svg" width="80px">
+                                    <img class="hand-link" v-on:click="showLearn('Debate')" src="@/assets/prenatal.svg" width="80px">
                                 </b-col>
                                 <b-col>
-                                    <h4>Neuro debate</h4> 
+                                    <h4 class="hand-link" v-on:click="showLearn('Debate')">Neuro debate</h4> 
                                     <p>Mira como hacer un Neuro debate, sumando la nueva filosofia al ABC</p>
                                 </b-col>
                             </b-row>
@@ -100,8 +99,8 @@ export default {
                 this.$router.push('/daily')
             }
         },
-        prueba() {
-            console.log("Hola");
+        showLearn(id) {
+            this.$router.push('/learn/' + id)
         }
     }
 
@@ -126,4 +125,7 @@ export default {
     margin-top: 30px;
 }
 
+.hand-link:hover{
+    cursor: pointer;
+}
 </style>

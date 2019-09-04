@@ -49,6 +49,14 @@ const router = new Router({
       meta: {
         auth: true
       }
+    },
+    {
+      path: '/learn/:id',
+      name: 'learn',
+      component: () => import('./views/Learn.vue'),
+      meta: {
+        auth: true
+      }
     }
   ]
 })
