@@ -1,8 +1,33 @@
 <template>
   <div>
       <Nav />
-      <h3>Learn</h3>
-      {{ $route.params.id }}
+      
+      <b-container v-if="$route.params.id === 'ABC'"> 
+        <h3>{{$route.params.id}}</h3>
+        <b-row>
+          <b-col>
+            <p>Esto es el ABC</p>            
+          </b-col>
+        </b-row>
+      </b-container>
+
+      <b-container v-if="$route.params.id === 'Breathing'"> 
+        <h3>{{$route.params.id}}</h3>
+        <b-row>
+          <b-col>
+            <p>Haz una respiracion asi</p>
+          </b-col>
+        </b-row>
+      </b-container>
+      
+      <b-container v-if="$route.params.id === 'Debate'"> 
+        <h3>{{$route.params.id}}</h3>
+        <b-row>
+          <b-col>
+            
+          </b-col>
+        </b-row>
+      </b-container>
   </div>
 </template>
 
@@ -12,7 +37,7 @@ import Nav from '@/components/Navbar.vue';
 export default {
   components: {
         Nav
-  },
+  }
 }
 </script>
 

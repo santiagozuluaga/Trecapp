@@ -188,6 +188,14 @@ export default {
         },
         resetTimer() {
             if(this.estado === true){
+                if(this.upsize){
+                    document.getElementById("breathing1").pause();
+                    this.upsize = false;
+                }
+                else{
+                    document.getElementById("breathing2").pause();
+                    this.downsize = false;
+                }
                 this.resetAll();
                 clearInterval(timer);
                 clearInterval(timerAnimation);

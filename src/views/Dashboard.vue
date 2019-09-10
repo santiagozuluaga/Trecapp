@@ -4,7 +4,7 @@
         <b-container>
             <b-row  class="justify-content-center">
                 <b-col order="2" order-lg="1" md="10" lg="6" class="text-center">
-                    <!--
+                    
                     <div class="background-home">
                         <b-container>
                             <b-row>
@@ -19,34 +19,24 @@
                             </b-row>
                         </b-container>
                     </div>
-                    -->
+                    
                     <div class="background-home">
                         <h3>Aprende lo básico</h3>
-                        <p>(Desactivado)</p>
                         <hr/>
                         <b-container>
                             <b-row class="text-left">
                                 <b-col cols="4" lg="3">
-                                    <img class="hand-link" v-on:click="showLearn('ABC')" src="@/assets/abc-block.svg" width="80px">
+                                    <img class="hand-link" v-on:click="showLearn('Breathing')" src="@/assets/Breathing.svg" width="80px">
                                 </b-col>
                                 <b-col>
-                                    <h4 class="hand-link" v-on:click="showLearn('ABC')">ABC</h4>
-                                    <p>Aprende que significa cada letra y a identificarlas en el Neuro debate</p>
-                                </b-col>
-                            </b-row>
-                            <b-row class="text-left">
-                                <b-col cols="4" lg="3">
-                                    <img class="hand-link" v-on:click="showLearn('Breathing')" src="@/assets/breathe.svg" width="80px">
-                                </b-col>
-                                <b-col>
-                                    <h4 class="hand-link" v-on:click="showLearn('Breathing')">Una buena respiración</h4> 
+                                    <h4 class="hand-link" v-on:click="showLearn('Breathing')">Neuro respiración</h4> 
                                     <p>Mira como llevar a cabo los ejercicios de respiración, aprende la velocidad en que se deben hacer y mucho más.
                                     </p>
                                 </b-col>
                             </b-row>
                             <b-row class="text-left">
                                 <b-col cols="4" lg="3">
-                                    <img class="hand-link" v-on:click="showLearn('Debate')" src="@/assets/prenatal.svg" width="80px">
+                                    <img class="hand-link" v-on:click="showLearn('Debate')" src="@/assets/ABC.svg" width="80px">
                                 </b-col>
                                 <b-col>
                                     <h4 class="hand-link" v-on:click="showLearn('Debate')">Neuro debate</h4> 
@@ -60,14 +50,14 @@
                     <div class="background-reloj">
                         <h3>Neuro-respiración</h3>
                         <hr/>
-                        <img class="images-options" src="@/assets/circular-clock.svg" width="100px">
+                        <img class="images-options" src="@/assets/Breathing.svg" width="100px">
                         <b-button variant="primary" block v-on:click="changeComponent(1)">Empezar</b-button>
                     </div>
                     <div class="background-debate">
                         <h3>Neuro-debate</h3>
                         <hr/>
                         <p>Registra tu actividad diaria para tener una mejora</p>
-                        <img class="images-options" src="@/assets/people.svg" width="100px">
+                        <img class="images-options" src="@/assets/ABC.svg" width="100px">
                         <b-button variant="primary" block v-on:click="changeComponent(2)">Empezar</b-button>
                     </div>
                 </b-col>
