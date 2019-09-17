@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname,'../dist/')));
 
 //Database conection
-mongoose.connect("mongodb+srv://NeuroApp:neurofilos@cluster0-9sz2p.mongodb.net/test?retryWrites=true&w=majority",
+mongoose.connect("mongodb+srv://NeuroApp:neurofilos@cluster0-9sz2p.mongodb.net/neurofilos?retryWrites=true&w=majority",
 { 
     useNewUrlParser: true 
 })
