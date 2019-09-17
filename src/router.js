@@ -57,6 +57,14 @@ const router = new Router({
       meta: {
         auth: true
       }
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: () => import('./views/Profile.vue'),
+      meta: {
+        auth: true
+      }
     }
   ]
 })
@@ -72,6 +80,8 @@ router.beforeEach((to, from, next) => {
   }
   else if (usuario && !autenticacion){
 
+    console.log(to.name);
+
     if(to.name == "dashboard"){
       next('dashboard');
     }
@@ -80,6 +90,9 @@ router.beforeEach((to, from, next) => {
     }
     else if(to.name == "daily"){
       next('daily');
+    }
+    else if(to.name == "learn"){
+      next('learn');
     }
     else {
       next('dashboard');

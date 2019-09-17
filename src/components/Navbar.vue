@@ -1,7 +1,8 @@
 <template>
   <b-navbar sticky type="dark" variant="primary" toggleable="lg">
     <div class="container">
-      <router-link class="Logo" to="/">Neuro App</router-link>
+      <b-navbar-brand href="/" class="logo" v-if="!auth">Neuro App</b-navbar-brand>
+      <b-navbar-brand href="/dashboard" class="logo" v-if="auth">Neuro App</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -9,6 +10,8 @@
         <b-navbar-nav class="ml-auto">
           <router-link v-if="!auth" class="text-nav" to="/signup">Comienza</router-link>
           <router-link v-if="!auth" class="text-nav" to="/signin">Acceder</router-link>
+          <b-nav-item v-on:click="changeWindow('dashboard')" v-if="auth" class="text-nav">Inicio</b-nav-item>
+          <b-nav-item v-on:click="changeWindow('profile')" v-if="auth" class="text-nav">Perfil</b-nav-item>
           <b-nav-item v-on:click="logout()" v-if="auth" class="text-nav">Salir</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -34,8 +37,8 @@ export default {
         localStorage.removeItem("Logged");
         this.$router.push('/');
       },
-      prueba() {
-        console.log(this.auth)
+      changeWindow(route) {
+        this.$router.push('/' + route);
       }
     }
 }

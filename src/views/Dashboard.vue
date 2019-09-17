@@ -5,6 +5,7 @@
             <b-row  class="justify-content-center">
                 <b-col order="2" order-lg="1" md="10" lg="6" class="text-center">
                     
+                    <!--
                     <div class="background-home">
                         <b-container>
                             <b-row>
@@ -19,7 +20,7 @@
                             </b-row>
                         </b-container>
                     </div>
-                    
+                    -->
                     <div class="background-home">
                         <h3>Aprende lo básico</h3>
                         <hr/>

@@ -95,6 +95,48 @@ app.post('/signin/user', async(req,res)=>{
 });
 
 
+//ChangePassword
+app.post('/user/Change-pass', async (req,res)=>{
+
+    var {email, password, confirmpassword} = req.body;
+    var userFind = await user.findOne( {email: email} );
+
+    if(password != confirmpassword){
+        res.json({
+            message:'Las contraseñas deben coincidir'
+        })
+    }
+    else if (!bcrypt.compareSync(password, userFind.password)){
+        res.json({
+            message:'La contraseña nueva no debe ser igual a la anterior'
+        });
+    }
+    else
+    {
+        userFind.password = password;
+        user.save(userFind);
+    }
+  
+});
+
+app.post('/user/delete', async (req,res)=>{
+
+    var {email, password} = req.body;
+    var userFind = await user.findOne( {email: email} );
+    
+    if (!bcrypt.compareSync(password, userFind.password)){
+        res.json({
+            message:'La contraseña es incorrecta'
+        });
+    }
+    else
+    {
+        user.remove( {email: email} );
+    }
+
+});
+
+
 //Start
 app.listen(app.get('port'), () => {
     console.log("Stating server " + app.get('port'));
