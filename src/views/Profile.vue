@@ -14,17 +14,21 @@
                         <p><br> Actual ccontraseña:</p>
                         <input class="input-profile" v-model="form.password" required type="password" placeholder="Actual contraseña">
                         <p><br>Nueva contraseña:</p>
-                        <input class="input-profile" v-model="form.repitpassword" required type="password" placeholder="Nueva contraseña">
+                        <input class="input-profile" v-model="form.newpassword" required type="password" placeholder="Nueva contraseña">
+                        <p><br>Nueva contraseña:</p>
+                        <input class="input-profile" v-model="form.repitpassword" required type="password" placeholder="Repetir contraseña">
                         <b-button class="button-profile" block type="submit" variant="primary">Actualizar información</b-button>
                     </b-form>
+                    <!--
                     <br>
                     <hr>
                     <h3 class="text-center">Eliminar cuenta</h3>
-                    <b-form class="profile-form">
+                    <b-form class="profile-form" @submit="deleteAcount">
                         <p><br>Ingresa la contraseña para confirmar</p>
                         <input class="input-profile" v-model="deleting.password" required type="password" placeholder="Contraseña">
                         <b-button class="button-profile" block type="submit" variant="danger">Eliminar</b-button>
                     </b-form>
+                    -->
                 </b-col>
             </b-row>
         </b-container>
@@ -37,11 +41,12 @@ export default {
     data() {
         return {
             user: {
-                name: "Santiago Zuluaga",
-                email: "santiagozh1998@gmail.com"
+                name: "",
+                email: ""
             },
             form: {
                 password: "",
+                newpassword: "",
                 repitpassword: ""
             },
             deleting: {
@@ -49,6 +54,11 @@ export default {
             }
         }
     },
+    created() {
+        this.user.name = localStorage.getItem('Name'); 
+        this.user.email = localStorage.getItem('Email'); 
+    }
+    ,
     components: {
         Nav
     },
@@ -56,7 +66,7 @@ export default {
         changePassword(event) {
             event.preventDefault();
 
-            if(this.form.password === "" || this.form.repitpassword === "" || this.form.password !== this.form.repitpassword){
+            if(this.form.password === "" || this.form.newpassword === "" || this.form.repitpassword === "" || this.form.newpassword !== this.form.repitpassword){
                 console.log("Error")
             }
             else{
@@ -69,6 +79,7 @@ export default {
                     body: JSON.stringify({
                         email: this.user.email,
                         password: this.form.password,
+                        newpassword: this.form.newpassword,
                         repitpassword: this.form.repitpassword
                     })
                 })
@@ -99,6 +110,11 @@ export default {
                 .then(res => console.log(res.message))
                 .catch(err => console.log(err))
             }
+
+            localStorage.removeItem("isLogged");
+            localStorage.removeItem("Email");
+            localStorage.removeItem("Name");
+            this.$router.push('/');
         }
     }
 }

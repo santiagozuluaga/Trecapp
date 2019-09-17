@@ -57,7 +57,9 @@ app.post('/signup/user', async(req,res)=>{
         var newUser = new user({name, email, password});
         await newUser.save();
         res.json({
-            message: 'Registro de sesión correcto'
+            message: 'Registro de sesión correcto',
+            name,
+            email
         });
         
     }    
@@ -69,14 +71,16 @@ app.post('/signup/user', async(req,res)=>{
 app.post('/signin/user', async(req,res)=>{
 
     var {email, password} = req.body;
-    var userFind = await user.find( {email: email} );
+    var userFind = await user.findOne( {email: email} );
 
-    if(userFind[0]){
-
-        if(bcrypt.compareSync(password, userFind[0].password)){
+    if(userFind){
+        console.log(bcrypt.compareSync(password, userFind.password))
+        if(bcrypt.compareSync(password, userFind.password)){
 
             res.json({
-                message: 'Inicio de sesión correcto'
+                message: 'Inicio de sesión correcto',
+                name: userFind.name,
+                email: userFind.email
             });
         }
         else{
@@ -98,23 +102,41 @@ app.post('/signin/user', async(req,res)=>{
 //ChangePassword
 app.post('/user/Change-pass', async (req,res)=>{
 
-    var {email, password, confirmpassword} = req.body;
+    var {email, password, newpassword, repitpassword} = req.body;
     var userFind = await user.findOne( {email: email} );
 
-    if(password != confirmpassword){
+    if(newpassword != repitpassword){
         res.json({
             message:'Las contraseñas deben coincidir'
         })
     }
-    else if (!bcrypt.compareSync(password, userFind.password)){
-        res.json({
-            message:'La contraseña nueva no debe ser igual a la anterior'
-        });
+    else if (bcrypt.compareSync(password, userFind.password)){
+
+        if (bcrypt.compareSync(newpassword, userFind.password)){
+            res.json({
+                message:'La contraseña nueva no debe ser igual a la anterior'
+            });
+        }
+        else {
+            res.json({
+                message:'Se actualizo con exito'
+            });
+            newpassword = bcrypt.hashSync(newpassword);
+            user.updateOne( {email: email}, {password: newpassword}, (err, res) => {
+                if(err) {
+                    throw err
+                }
+                else {
+                    console.log("1 document updated");
+                }
+            });
+        }
+
     }
-    else
-    {
-        userFind.password = password;
-        user.save(userFind);
+    else{
+        res.json({
+            message:'La contraseña no coincide'
+        });
     }
   
 });
@@ -124,14 +146,18 @@ app.post('/user/delete', async (req,res)=>{
     var {email, password} = req.body;
     var userFind = await user.findOne( {email: email} );
     
-    if (!bcrypt.compareSync(password, userFind.password)){
+    if (bcrypt.compareSync(password, userFind.password)){
         res.json({
-            message:'La contraseña es incorrecta'
+            message:'Borrando usuario'
         });
+        var userdelete = user.remove({email: email});
+        console.log(userdelete);
     }
     else
     {
-        user.remove( {email: email} );
+        res.json({
+            message:'La contraseña es incorrecta'
+        });
     }
 
 });

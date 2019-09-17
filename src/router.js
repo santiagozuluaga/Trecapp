@@ -71,7 +71,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
 
-  var usuario = localStorage.getItem("Logged");
+  var usuario = localStorage.getItem("isLogged");
   var autenticacion = to.matched.some(record => record.meta.auth);
 
   if(!usuario && autenticacion){

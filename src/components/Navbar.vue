@@ -28,13 +28,15 @@ export default {
     },
     created() {
 
-      if(localStorage.getItem('Logged')){
-        this.auth = localStorage.getItem('Logged'); 
+      if(localStorage.getItem('isLogged')){
+        this.auth = localStorage.getItem('isLogged'); 
       }
     },
     methods: {
       logout() {
-        localStorage.removeItem("Logged");
+        localStorage.removeItem("isLogged");
+        localStorage.removeItem("Email");
+        localStorage.removeItem("Name");
         this.$router.push('/');
       },
       changeWindow(route) {

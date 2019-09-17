@@ -54,7 +54,9 @@ export default {
             }
             else {
                 //localStorage.setItem("Usuario", res.user);
-                localStorage.setItem("Logged", true);
+                localStorage.setItem("isLogged", true);
+                localStorage.setItem("Email", res.email);
+                localStorage.setItem("Name", res.name);
                 this.$router.replace('/dashboard');
             }
 

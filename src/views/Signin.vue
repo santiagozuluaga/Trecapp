@@ -41,15 +41,16 @@ export default {
     },
     methods: {
         checkAuth(res) {
-            console.log("verificando");
             var message = res.message;
             console.log(message);
-            if(message === "Usuario no encontrado"){
+            if(message === "Usuario no encontrado" || message === "Contraseña incorrecta"){
                 this.alertData = true;
             }
             else {
                 //localStorage.setItem("Usuario", res.user);
-                localStorage.setItem("Logged", true);
+                localStorage.setItem("isLogged", true);
+                localStorage.setItem("Email", res.email);
+                localStorage.setItem("Name", res.name);
                 this.$router.replace('/dashboard');
             }
         },

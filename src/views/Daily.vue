@@ -38,7 +38,7 @@
         </b-container>
         <!--EMOCIONES-->
         <b-container v-if="level[0] === 1" class="text-center">
-            <h3 class="title-emotions">¿Tu emoción es ...?</h3>
+            <h3 class="title-emotions">C: ¿Tu emoción es ...?</h3>
             <hr />
 
             <b-row>
@@ -97,7 +97,7 @@
 
         <!--TEXTAREA-->
         <b-container v-if="level[1] === 1" class="text-center">
-            <h3 class="title-emotions">¿Qué fue lo que te pasó hoy?</h3>
+            <h3 class="title-emotions">A: ¿Qué fue lo que te pasó hoy?</h3>
             <hr />
 
             <b-row class="justify-content-sm-center">
@@ -118,7 +118,7 @@
         <b-container v-if="level[2] === 1" class="text-center">
             <b-row class="justify-content-center">
                 <b-col sm="12" md="10" lg="8">
-                    <h3 class="title-emotions">¿Qué pensaste?</h3>
+                    <h3 class="title-emotions">B: ¿Qué pensaste?</h3>
                     <hr />
 
                     <b-button v-if="irrational[0] === 0" v-on:click="selectIrrational('irrational-1')" id="irrational-1" variant="outline-primary" class="irrational" block>
@@ -149,7 +149,7 @@
         </b-container>
         
         <b-container v-if="level[3] === 1 " class="text-center">
-            <h3 class="title-emotions">Preguntas disputa</h3>
+            <h3 class="title-emotions">D: Preguntas disputa</h3>
             <h4>Tomese el tiempo para responder cada pregunta antes de seguir y en caso de no poder, haga el ejercicio de respiracion e intente de nuevo.</h4>
             <hr />
             <b-row class="justify-content-center">
